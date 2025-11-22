@@ -14,18 +14,6 @@ Concurrency-safe server selection
 
 Multiple backend servers running independently
 
-📂 Project Structure
-
-loadbalancer/
- ├── main.go                  # Load balancer entry point
- ├── go.mod                   # Go module definition
- ├── balancer/
- │     ├── balancer.go        # LoadBalancer interface
- │     └── roundrobin.go      # Round Robin implementation
- └── backend/
-       ├── server1.go         # Backend server 1 (port 9001)
-       ├── server2.go         # Backend server 2 (port 9002)
-       └── server3.go         # Backend server 3 (port 9003)
 
 
 🚀 How to Run the Project
