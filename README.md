@@ -63,8 +63,3 @@ net/http
 httputil.ReverseProxy
 
 Mutex for concurrency safety
-
-
-
-
-“Let’s start Level 2.”
