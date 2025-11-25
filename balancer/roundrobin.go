@@ -3,22 +3,29 @@ package balancer
 import "sync"
 
 type RoundRobin struct {
-    servers []string
-    index   int
-    mu      sync.Mutex
+	index int
+	mu    sync.Mutex
 }
 
-func NewRoundRobin(servers []string) *RoundRobin {
-    return &RoundRobin{
-        servers: servers,
-        index:   0,
-    }
+func NewRoundRobin() *RoundRobin {
+	return &RoundRobin{}
 }
 
-func (r *RoundRobin) NextServer() string {
-    r.mu.Lock()
-    defer r.mu.Unlock()
-    server := r.servers[r.index]
-    r.index = (r.index + 1) % len(r.servers)
-    return server
+func (r *RoundRobin) NextServer(servers []string) string {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	// ALWAYS wrap correctly based on current healthy server count
+	if len(servers) == 0 {
+		return ""
+	}
+
+	if r.index >= len(servers) {
+		r.index = 0
+	}
+
+	server := servers[r.index]
+	r.index++
+
+	return server
 }

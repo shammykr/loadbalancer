@@ -1,5 +1,5 @@
 package balancer
 
 type LoadBalancer interface {
-    NextServer() string
+	NextServer([]string) string
 }
